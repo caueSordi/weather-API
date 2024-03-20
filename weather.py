@@ -1,7 +1,7 @@
 import requests
 
 BASE_URL = 'https://api.openweathermap.org/data/2.5/weather'
-API_KEY = '1970964766849a2799302cc1b7e1fdab'
+API_KEY = ''
 
 
 def kelvin_to_celsius(kelvin):
