@@ -1,7 +1,7 @@
 import requests
 
 BASE_URL = 'https://api.openweathermap.org/data/2.5/weather'
-API_KEY = 'key'  # Fill in your OpenWeatherMap API key
+API_KEY = '1970964766849a2799302cc1b7e1fdab'  # Fill in your OpenWeatherMap API key
 
 def sport_recommendation(temperature, description):
     if temperature > 20 and description in ['clear sky', 'sunny']:
