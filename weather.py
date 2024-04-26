@@ -65,13 +65,13 @@ if response.status_code == 200:
         print("I recommend you to take an umbrella")
 
     match = input("What are you planning to do today? \n")
-    if match == 'sport':
+    if match == 'sport'or match == 'exercise' or match == 'traine':
         sport_recommendation(temperature, description)
-    elif match == 'hangout':
+    elif match == 'hangout' or match == ' go out with friends':
         hangout_recommendation(temperature, description)
-    elif match == 'social':
+    elif match == 'socialize' or match == 'meet new people':
         social_recommendation(temperature, description)
-    elif match == 'date':
+    elif match == 'date' or match == 'dating' or   match == 'romantic' or match == 'romance':
         date_recommendation(temperature, description)
     else:
         print("Invalid input.")
