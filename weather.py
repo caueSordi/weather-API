@@ -3,6 +3,32 @@ import requests
 BASE_URL = 'https://api.openweathermap.org/data/2.5/weather'
 API_KEY = ''
 
+def sport_recommendation(temperature, description):
+    if temperature > 20 and description == 'clear sky' or description == 'sunny':
+        print("the weather is perfect to play tennis or go for a run")
+    elif temperature < 15 and description == 'rain' or description == 'overcast clouds'or description == 'broken clouds':
+        print("maybe it's better to stay inside today, maybe hit the gym do some yoga") 
+
+
+def hangout_recommendation(temperature, description):
+    if temperature > 20 and description == 'clear sky' or description == 'sunny':
+        print("The weather is perfect for a picnic ")
+    elif temperature < 15 and description == 'rain' or description == 'overcast clouds'or description == 'broken clouds':
+        print("the weather isn't the best for outside activities today, maybe go to the mall or watch a movie at home")
+
+def social_recommendation():
+    if temperature >20 and description == 'clear sky' or description == 'sunny':
+        print("maybe today try to find new friends, go to a park or a cafe \n")
+        print(' maybe a club or a bar')
+    elif temperature < 15 and description == 'rain' or description == 'overcast clouds'or description == 'broken clouds':
+        print(" maybe go outside isn't the best option for now, but you can socialize online, just don't go on twitter \n")
+
+
+def date_recommendation():
+    if temperature > 20 and description == 'clear sky' or description == 'sunny':
+        print("what a lovely day to go on a date on the park or maybe a cafe")
+    elif temperature < 15 and description == 'rain' or description == 'overcast clouds'or description == 'broken clouds':
+        print("maybe stay at home, watch a movie or cook together")
 
 def kelvin_to_celsius(kelvin):
     celsius = kelvin - 273.15
@@ -43,25 +69,18 @@ if response.status_code == 200:
     elif description == 'scattered clouds':
         print("I recomend you to take an umbrella")
 
-    if temperature > 20 and description == 'clear sky' or description == 'scattered clouds' :
-        print("The weather is perfect for a picnic")
-    elif temperature <15 and description == 'rain' or description == 'overcast clouds'or description == 'broken clouds':
-        print("such a cozy day to watch a film right?")
-        answer = input("do you have a partner to watch it with?\n")
-        
-        if answer == 'yes':
-            print("you are lucky")
-        elif answer == 'no':
-            print("you should call someone \n")
-        else:
-            print("I don't know what to say about that")
-            lonely = input("do you have someone to call? \n")
-            if lonely == 'yes':
-                print("then you problably should call them")
-            else:
-                print("it's okay to be alone sometimes, but there's a whole of people out there waiting for you to meet them")
 
-        
-    print('have a nice day :)')
-else:
-    print("Failed ", response.status_code)
+match = input("what are you planning to do today? \n")
+if match == 'sport':
+    sport_recommendation(temperature, description)
+
+elif match == 'hangout':
+    hangout_recommendation(temperature, description)
+
+elif match == 'social':
+    social_recommendation()
+
+elif match == 'date':
+    date_recommendation()
+
+
