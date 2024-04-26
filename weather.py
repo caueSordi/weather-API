@@ -1,40 +1,38 @@
 import requests
 
 BASE_URL = 'https://api.openweathermap.org/data/2.5/weather'
-API_KEY = ''
+API_KEY = 'key'  # Fill in your OpenWeatherMap API key
 
 def sport_recommendation(temperature, description):
-    if temperature > 20 and description == 'clear sky' or description == 'sunny':
-        print("the weather is perfect to play tennis or go for a run")
-    elif temperature < 15 and description == 'rain' or description == 'overcast clouds'or description == 'broken clouds':
-        print("maybe it's better to stay inside today, maybe hit the gym do some yoga") 
-
+    if temperature > 20 and description in ['clear sky', 'sunny']:
+        print("The weather is perfect to play tennis or go for a run")
+    elif temperature < 15 and description in ['rain', 'overcast clouds', 'broken clouds']:
+        print("Maybe it's better to stay inside today, maybe hit the gym or do some yoga")
 
 def hangout_recommendation(temperature, description):
-    if temperature > 20 and description == 'clear sky' or description == 'sunny':
-        print("The weather is perfect for a picnic ")
-    elif temperature < 15 and description == 'rain' or description == 'overcast clouds'or description == 'broken clouds':
-        print("the weather isn't the best for outside activities today, maybe go to the mall or watch a movie at home")
+    if temperature > 20 and description in ['clear sky', 'sunny']:
+        print("The weather is perfect for a picnic")
+    elif temperature < 15 and description in ['rain', 'overcast clouds', 'broken clouds']:
+        print("The weather isn't the best for outside activities today, maybe go to the mall or watch a movie at home")
 
-def social_recommendation():
-    if temperature >20 and description == 'clear sky' or description == 'sunny':
-        print("maybe today try to find new friends, go to a park or a cafe \n")
-        print(' maybe a club or a bar')
-    elif temperature < 15 and description == 'rain' or description == 'overcast clouds'or description == 'broken clouds':
-        print(" maybe go outside isn't the best option for now, but you can socialize online, just don't go on twitter \n")
+def social_recommendation(temperature, description):
+    if temperature > 20 and description in ['clear sky', 'sunny']:
+        print("Maybe today try to find new friends, go to a park or a cafe")
+        print("Maybe a club or a bar")
+    elif temperature < 15 and description in ['rain', 'overcast clouds', 'broken clouds']:
+        print("Maybe going outside isn't the best option for now, but you can socialize online, just don't go on Twitter")
 
-
-def date_recommendation():
-    if temperature > 20 and description == 'clear sky' or description == 'sunny':
-        print("what a lovely day to go on a date on the park or maybe a cafe")
-    elif temperature < 15 and description == 'rain' or description == 'overcast clouds'or description == 'broken clouds':
-        print("maybe stay at home, watch a movie or cook together")
+def date_recommendation(temperature, description):
+    if temperature > 20 and description in ['clear sky', 'sunny']:
+        print("What a lovely day to go on a date in the park or maybe a cafe")
+    elif temperature < 15 and description in ['rain', 'overcast clouds', 'broken clouds']:
+        print("Maybe stay at home, watch a movie, or cook together")
 
 def kelvin_to_celsius(kelvin):
     celsius = kelvin - 273.15
     return celsius
 
-CITY= input("location name: ")
+CITY = input("Location name: ")
 
 params = {
     "q": CITY,
@@ -46,41 +44,36 @@ response = requests.get(BASE_URL, params=params)
 if response.status_code == 200:
     data = response.json()
     temperature = kelvin_to_celsius(data['main']['temp'])  # Extract temperature from 'main' section
-    city_name = data['name']  #pick the name on the data 
-    time_zone = data['timezone']  #pick the time zone on the data
-    description = data['weather'][0]['description']  # picks the description from the raw data, 'weather is the group [0] is the position of the wanted info and  'descriptiom' is the wanetd info
-    print(f"location: {city_name}")
-    print(f"temperature: {temperature:.2f}°C")
+    description = data['weather'][0]['description']  # Extract description
+    print(f"Location: {CITY}")
+    print(f"Temperature: {temperature:.2f}°C")
     if temperature > 30:
         print("It's hot today")
-    elif temperature < 20 > 10:
+    elif 20 <= temperature <= 30:
+        print("The weather is nice today :)")
+    elif 10 <= temperature < 20:
         print("It's cold today")
-    elif temperature <10:
-        print("you should wear a coat today")
-    else:
-        print("the weather is nice today :)")
+    elif temperature < 10:
+        print("You should wear a coat today")
 
-    print(f"timezone: {time_zone}")
     print(f"Today there will be: {description}")
     if description == 'clear sky':
-        print("Remember to use sun screen")
+        print("Remember to use sunscreen")
     elif description == 'rain':
-        print("you will need an umbrella")
+        print("You will need an umbrella")
     elif description == 'scattered clouds':
-        print("I recomend you to take an umbrella")
+        print("I recommend you to take an umbrella")
 
-
-match = input("what are you planning to do today? \n")
-if match == 'sport':
-    sport_recommendation(temperature, description)
-
-elif match == 'hangout':
-    hangout_recommendation(temperature, description)
-
-elif match == 'social':
-    social_recommendation()
-
-elif match == 'date':
-    date_recommendation()
-
-
+    match = input("What are you planning to do today? \n")
+    if match == 'sport':
+        sport_recommendation(temperature, description)
+    elif match == 'hangout':
+        hangout_recommendation(temperature, description)
+    elif match == 'social':
+        social_recommendation(temperature, description)
+    elif match == 'date':
+        date_recommendation(temperature, description)
+    else:
+        print("Invalid input.")
+else:
+    print("Failed to retrieve weather data. Please check your internet connection or try again later.")
