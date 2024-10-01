@@ -9,7 +9,7 @@ def kelvin_to_celsius(kelvin):
 
 def get_weather_data(city):
     BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
-    API_KEY = ''  # Fill in your OpenWeatherMap API key
+    API_KEY = '51624c701e2ceaefb78368f8876959f2'  # Fill in your OpenWeatherMap API key
     params = {
         "q": city,
         "appid": API_KEY
@@ -67,6 +67,14 @@ def should_sleep():
         typing("You should be sleeping now!")
     else:
         typing("The day is still young, keep going!")
+        now = datetime.now()
+        current_time = now.strftime("%H:%M:%S")
+        hour, minute, second = map(int, current_time.split(':'))
+        remaining_seconds = 24 * 3600 - (hour * 3600 + minute * 60 + second)
+        remaining_hours = remaining_seconds // 3600
+        remaining_minutes = (remaining_seconds % 3600) // 60
+        remaining_seconds = remaining_seconds % 60
+        typing(f"You have {remaining_hours} hours, {remaining_minutes} minutes, and {remaining_seconds} seconds remaining in the day.")
 
 def shouldnt_be_outside(temperature, description):
     now = datetime.now()
@@ -85,15 +93,21 @@ def comemorative_dates():
     else:
         typing("")
 
-def typing(text, speed=0.05):
+def typing(text, speed=0.04):
     for char in text:
         sys.stdout.write(char)
         sys.stdout.flush()
         time.sleep(speed)
     print()  # To move to the next line after the message is printed
 
-typing("Hello! I am your personal assistant.")
 
+
+def get_name():
+    name = input("What's your name? ")
+    typing(f"Nice to meet you, {name}!")
+
+typing("Hello! I am your personal assistant.")
+get_name()
 tell_date()
 comemorative_dates()
 tell_time_of_day()
