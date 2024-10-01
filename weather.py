@@ -65,15 +65,14 @@ if response.status_code == 200:
         print("I recommend you to take an umbrella")
 
     match = input("What are you planning to do today? \n")
-    if match == 'sport'or match == 'exercise' or match == 'traine':
+    if match == 'sport'or match == 'exercise' or match == 'traine' or match == 'Sport':
         sport_recommendation(temperature, description)
-    elif match == 'hangout' or match == ' go out with friends':
+    elif match == 'hangout' or match == ' go out with friends'or match == 'Go out':
         hangout_recommendation(temperature, description)
     elif match == 'socialize' or match == 'meet new people':
         social_recommendation(temperature, description)
-    elif match == 'date' or match == 'dating' or   match == 'romantic' or match == 'romance':
+    elif match == 'date' or match == 'dating' or   match == 'romantic' or match == 'romance' or match == 'Date':
         date_recommendation(temperature, description)
     else:
         print("Invalid input.")
-else:
-    print("Failed to retrieve weather data. Please check your internet connection or try again later.")
+print("Failed to retrieve weather data. Please check your internet connection or try again later.")
