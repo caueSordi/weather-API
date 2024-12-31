@@ -1,3 +1,6 @@
 task
 estudar eletromag
 finalizar 3 exercicios de mecsol
+codar api de viajem
+cochilar
+separar funções de api de viajem como tempo de viajem, previsao de tempo ao chegar etc
